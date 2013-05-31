@@ -4,15 +4,24 @@ var guessedDiv = document.getElementById("Guess");
 var dashes = "";
 var newDashes = "";
 
-var guess = new Array();
-guess[0] = "s";
-guess[1] = "a";
-guess[2] = "j";
-guess[3] = "v";
+
+function setCharAt(index, character, string) {
+	return string.substring(0, index) + character + string.substring(index + character.length);
+}
 
 
-guessedDiv.innerHTML = "";
-runGame();
+function getSelection() {
+	var test = document.getElementsByName('letter');
+	var sizes = test.length;
+	for (i = 0; i < sizes; i++) {
+		if (test[i].checked == true) {
+			return test[i].value;
+		}
+	}
+}
+var letter = getSelection();
+console.log(letter);
+var guess = letter;
 
 function runGame() {
 
@@ -21,20 +30,21 @@ function runGame() {
 	};
 
 	guessedDiv.innerHTML = dashes;
-
+	dashes = checkLetter(dashes);
+	var dashes2 = checkLetter(dashes);
+	guessedDiv.innerHTML = dashes2;
+}
+function checkLetter(str) {
 	for (var i = 0; i < hiddenWordLength; i++) {
 		for (var j = 0; j < hiddenWordLength; j++) {
 
-			if (hiddenWord.charAt(i) === guess[j]) {
-				dashes = setCharAt(i, guess[j], dashes);
+			if (hiddenWord.charAt(i) === guess) {
+				str = setCharAt(i, guess, str);
+			} else {
+				continue;
 			}
 		};
-
 	};
-	guessedDiv.innerHTML = dashes;
+	return str;
 }
-//console.log(dashes);
-
-function setCharAt(index, character, string) {
-	return string.substring(0, index) + character + string.substring(index + character.length);
-}
+runGame();
