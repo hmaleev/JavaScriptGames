@@ -1,0 +1,86 @@
+*
+{
+	padding: 10;
+	margin: 10;
+}
+button
+{
+	display: block;
+}
+div
+{
+	display: inline-block;
+	width: 400px;
+	background-color: #000;
+}
+ol {
+	list-style-type: none;
+}
+ol li>div,a
+{	width: 90%;
+	display: block;
+	background-color: #000;
+	color:#0C0;
+	overflow: auto;
+}
+
+textarea
+{
+	width: 90%;
+}
+input
+{
+	width: 90%;
+}
+button {
+	background-color: #000;
+	border: 1px solid #0C0;
+	color: #0C0;
+	border-collapse: collapse;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 20px;
+}
+button:active {
+	background-color: #0C0;
+	border: 1px solid #000;
+	color: #000;
+	border-collapse: collapse;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 20px;
+}
+input {
+	background-color: #000;
+	border: 1px solid #0C0;
+	color: #0C0;
+	border-collapse: collapse;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+#task2, #hiddenNumber, #history,#inputNumber, #GuessNumber {
+	display: none;
+}
+#showHistoryBtn, #hideHistoryBtn {
+	display: block;
+}
+a {
+	color: #0C0;
+	text-decoration: none;
+	
+}
+p {
+	color:#0C0;
+	padding: 10px;
+}
+select {
+background: #000;
+border: 1px solid #0C0;
+color: #0C0;
+margin-left: 20px;
+
+}
+option {
+background: #000;
+color: #0c0;
+}
