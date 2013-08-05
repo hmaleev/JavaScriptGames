@@ -109,7 +109,57 @@ function HideInf() {
     for (var i = 0; i < x.length; i++) {
         x[i].style.display = "none";
     }
+    test.style.display = "none"
+}
+function ShowSettings() {
+	var x = document.getElementById("settings")
+	x.style.display = "block";
+    x.className="selected";
+    ChangeClassName("menu")
+  
+    HideInf();
+}
 
+function ShowHelp() {
+    var x = document.getElementById("help")
+    x.style.display = "block";
+    x.className="selected";
+    ChangeClassName("menu")
+  
+    HideInf();
+}
+function ShowGame() {
+    var x = document.getElementById("game")
+    x.style.display = "block";
+    x.className="selected";
+    ChangeClassName("menu")
+  
+    HideInf();
+}
+function ShowHighScores() {
+    var x = document.getElementById("highscore")
+    x.style.display = "block";
+    x.className="selected";
+    ChangeClassName("menu")
+  
+    HideInf();
+}
+
+function BackBtn(id) {
+    var x = document.getElementById("menu")
+    x.style.display = "block";
+    x.className="selected";
+    ChangeClassName(id);
+  
+    HideInf();
+}
+
+
+function ChangeClassName(id) {
+
+    var x = document.getElementById(id);
+    x.className="hidden" ;
+    return x;
 }
 
 function saveState(text) {
