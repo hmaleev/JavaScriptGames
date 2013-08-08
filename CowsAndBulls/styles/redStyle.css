@@ -3,6 +3,9 @@
 	padding: 10;
 	margin: 10;
 }
+body {
+background-color:#f00;
+}
 button
 {
 	display: block;
@@ -11,7 +14,7 @@ div
 {
 	display: inline-block;
 	width: 400px;
-	background:#f00;
+	
 	
 }
 ol {
