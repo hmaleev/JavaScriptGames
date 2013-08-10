@@ -3,7 +3,8 @@ var hiddenWordLength = hiddenWord.length;
 var guessedWord = new Array();
 var chars = new Array();
 var guessedDiv = document.getElementById("Guess");
-
+var lives =6;
+var letterExists = false;
 for (var i = 0; i < hiddenWordLength; i++) {
 	guessedWord[i] = "-";
 
@@ -23,17 +24,22 @@ var res = guess(guessedWord,hiddenWord,"A");
 console.log(res);
 console.log(guess(res,hiddenWord,"S"));
 */
-function guess(guessedWord, hiddenWord, letter) {
 
+function guess(guessedWord, hiddenWord, letter) {
+	letterExists = false;
 	for (var i = 0; i < hiddenWord.length; i++) {
 		if (letter === hiddenWord[i]) {
 			guessedWord[i] = letter;
+			letterExists = true;
 		}
-		
 	}
-	if (guessedWord.join("")===hiddenWord) {
-			alert("You won the game");
-		};
+	if (!letterExists) {
+		lives--
+		isDead(lives);
+	};
+	if (guessedWord.join("") === hiddenWord) {
+		alert("You won the game");
+	};
 
 	return guessedWord;
 }
@@ -50,11 +56,35 @@ function getSelection() {
 }
 
 
+function isDead(lives) {
 
-
+	switch(lives) {
+		case 5:
+			drawHead();
+			break;
+		case 4:
+			drawBody();
+			break;
+		case 3:
+			drawLeftArm();
+			break;
+		case 2: 
+			drawRightArm();
+			break;
+		case 1:
+			drawLeftLeg();
+			break;
+		case 0:
+			drawRightLeg();
+			alert("You lost");
+			break;
+	}
+}
+/*
 drawHead();
 drawBody();
 drawLeftLeg();
 drawRightLeg();
 drawLeftArm();
 drawRightArm();
+*/
