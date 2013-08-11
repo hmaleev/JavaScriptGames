@@ -1,11 +1,18 @@
-var hiddenWord = document.getElementById("hiddenWord").innerHTML;
+var hiddenWord = document.getElementById("hiddenWord")
 var hiddenWordLength = hiddenWord.length;
 var guessedWord = new Array();
 var chars = new Array();
 var guessedDiv = document.getElementById("Guess");
-var lives =6;
-var letterExists = false;
-for (var i = 0; i < hiddenWordLength; i++) {
+var lives = 6;
+var letterExists;
+
+var words = getWord();
+var rw = getRandomWord(words);
+//alert(rw);
+hiddenWord.innerHTML = rw;
+hiddenWord = hiddenWord.innerHTML;
+
+for (var i = 0; i < hiddenWord.length; i++) {
 	guessedWord[i] = "-";
 
 };
@@ -16,14 +23,37 @@ function getLetter() {
 	return letter
 }
 
+function getWord() {
+	var y = [];
+	var x = $("#Words").text()
+	console.log(x);
+
+	y = x.split("\n");
+	$.each(y, function(idx, val) {
+
+		y[idx] = $.trim(this);
+
+	});
+	y.splice(0, 1);
+	y.splice(length - 1, 1)
+	console.log(y);
+	return y;
+}
+
+function getRandomWord(words) {
+
+
+	var randomWord;
+	var wordIndex = Math.floor((Math.random() * words.length));
+	randomWord = words[wordIndex];
+	return randomWord;
+}
+
+
+
 getLetter();
 //console.log(x);
 guessedDiv.innerHTML = guessedWord.join("");
-/*
-var res = guess(guessedWord,hiddenWord,"A");
-console.log(res);
-console.log(guess(res,hiddenWord,"S"));
-*/
 
 function guess(guessedWord, hiddenWord, letter) {
 	letterExists = false;
@@ -35,7 +65,7 @@ function guess(guessedWord, hiddenWord, letter) {
 	}
 	if (!letterExists) {
 		lives--
-		isDead(lives);
+		remainingLives(lives);
 	};
 	if (guessedWord.join("") === hiddenWord) {
 		alert("You won the game");
@@ -50,15 +80,15 @@ function getSelection() {
 		console.log(text);
 		$("input").val(text);
 		var letter = $("input").value;
-		var x=	guess(guessedWord,hiddenWord,text);
+		var x = guess(guessedWord, hiddenWord, text);
 		guessedDiv.innerHTML = x.join("");
 	});
 }
 
 
-function isDead(lives) {
+function remainingLives(lives) {
 
-	switch(lives) {
+	switch (lives) {
 		case 5:
 			drawHead();
 			break;
@@ -68,7 +98,7 @@ function isDead(lives) {
 		case 3:
 			drawLeftArm();
 			break;
-		case 2: 
+		case 2:
 			drawRightArm();
 			break;
 		case 1:
@@ -80,11 +110,3 @@ function isDead(lives) {
 			break;
 	}
 }
-/*
-drawHead();
-drawBody();
-drawLeftLeg();
-drawRightLeg();
-drawLeftArm();
-drawRightArm();
-*/
