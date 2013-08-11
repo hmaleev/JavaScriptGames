@@ -1,6 +1,9 @@
 button {
 width:47px;
 height:47px;
+border-radius:30px;
+background-color:#426932;
+color:#fff;
 }
 #words, #hiddenWord{
 display:none;

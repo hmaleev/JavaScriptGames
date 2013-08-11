@@ -14,6 +14,9 @@ hiddenWord = hiddenWord.innerHTML;
 
 for (var i = 0; i < hiddenWord.length; i++) {
 	guessedWord[i] = "-";
+	if(hiddenWord[i]===" "){
+			guessedWord[i]=" "
+		}
 
 };
 
@@ -62,6 +65,7 @@ function guess(guessedWord, hiddenWord, letter) {
 			guessedWord[i] = letter;
 			letterExists = true;
 		}
+		
 	}
 	if (!letterExists) {
 		lives--
