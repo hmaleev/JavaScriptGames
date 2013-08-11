@@ -55,7 +55,6 @@ function getRandomWord(words) {
 
 
 getLetter();
-//console.log(x);
 guessedDiv.innerHTML = guessedWord.join("");
 
 function guess(guessedWord, hiddenWord, letter) {
@@ -69,7 +68,7 @@ function guess(guessedWord, hiddenWord, letter) {
 	}
 	if (!letterExists) {
 		lives--
-		remainingLives(lives);
+		remainingLives(lives,hiddenWord);
 	};
 	if (guessedWord.join("") === hiddenWord) {
 		alert("You won the game");
@@ -90,7 +89,7 @@ function getSelection() {
 }
 
 
-function remainingLives(lives) {
+function remainingLives(lives, hiddenWord) {
 
 	switch (lives) {
 		case 5:
@@ -110,7 +109,7 @@ function remainingLives(lives) {
 			break;
 		case 0:
 			drawRightLeg();
-			alert("You lost");
+			alert("You lost. The hidden word was " +hiddenWord);
 			break;
 	}
 }
