@@ -1,8 +1,9 @@
-var hiddenWord = document.getElementById("hiddenWord")
+
+var hiddenWord = $("#hiddenWord");
 var hiddenWordLength = hiddenWord.length;
 var guessedWord = new Array();
 var chars = new Array();
-var guessedDiv = document.getElementById("Guess");
+var guessedDiv = $("#Guess");
 var lives = 6;
 var letterExists;
 
@@ -12,15 +13,26 @@ hiddenWord.innerHTML = rw;
 hiddenWord = hiddenWord.innerHTML;
 
 for (var i = 0; i < hiddenWord.length; i++) {
-	guessedWord[i] = "-";
+	guessedWord[i] = "*";
 	if (hiddenWord[i] === " ") {
 		guessedWord[i] = " "
 	}
 
 };
 
+
+getLetter();
+guessedDiv.html(guessedWord.join(""));
+
+
 function getLetter() {
-	getSelection();
+		return $("button").click(function() {
+		var text = $(this).text();
+		$("input").val(text);
+	//	var letter = $("input").value;
+		var x = guess(guessedWord, hiddenWord, text);
+		guessedDiv.html(x.join(""));
+	});
 	var letter = $("input").value;
 	return letter
 }
@@ -51,10 +63,6 @@ function getRandomWord(words) {
 	return randomWord;
 }
 
-
-getLetter();
-guessedDiv.innerHTML = guessedWord.join("");
-
 function guess(guessedWord, hiddenWord, letter) {
 	letterExists = false;
 	for (var i = 0; i < hiddenWord.length; i++) {
@@ -79,18 +87,6 @@ function guess(guessedWord, hiddenWord, letter) {
 
 	return guessedWord;
 }
-
-function getSelection() {
-	return $("button").click(function() {
-		var text = $(this).text();
-
-		$("input").val(text);
-		var letter = $("input").value;
-		var x = guess(guessedWord, hiddenWord, text);
-		guessedDiv.innerHTML = x.join("");
-	});
-}
-
 
 function remainingLives(lives, hiddenWord) {
 
@@ -122,4 +118,5 @@ function remainingLives(lives, hiddenWord) {
 		location.reload();
 		
 	}
+
 }

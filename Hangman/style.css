@@ -1,10 +1,15 @@
 button {
-width:47px;
-height:47px;
+width:30px;
+height:30px;
 border-radius:30px;
 background-color:#426932;
 color:#fff;
+
 }
 #words, #hiddenWord{
 display:none;
+}
+#Guess {
+font-size:30px;
+letter-spacing:2px
 }
