@@ -8,15 +8,14 @@ var letterExists;
 
 var words = getWord();
 var rw = getRandomWord(words);
-//alert(rw);
 hiddenWord.innerHTML = rw;
 hiddenWord = hiddenWord.innerHTML;
 
 for (var i = 0; i < hiddenWord.length; i++) {
 	guessedWord[i] = "-";
-	if(hiddenWord[i]===" "){
-			guessedWord[i]=" "
-		}
+	if (hiddenWord[i] === " ") {
+		guessedWord[i] = " "
+	}
 
 };
 
@@ -39,7 +38,7 @@ function getWord() {
 	});
 	y.splice(0, 1);
 	y.splice(length - 1, 1)
-	console.log(y);
+
 	return y;
 }
 
@@ -53,7 +52,6 @@ function getRandomWord(words) {
 }
 
 
-
 getLetter();
 guessedDiv.innerHTML = guessedWord.join("");
 
@@ -64,15 +62,20 @@ function guess(guessedWord, hiddenWord, letter) {
 			guessedWord[i] = letter;
 			letterExists = true;
 		}
-		
+
 	}
 	if (!letterExists) {
 		lives--
-		remainingLives(lives,hiddenWord);
+		remainingLives(lives, hiddenWord);
 	};
 	if (guessedWord.join("") === hiddenWord) {
-		alert("You won the game");
+		var answer = confirm("You won the game! Do you want to play another game?");
 	};
+	if (answer === true) {
+
+		location.reload();
+		
+	}
 
 	return guessedWord;
 }
@@ -80,7 +83,7 @@ function guess(guessedWord, hiddenWord, letter) {
 function getSelection() {
 	return $("button").click(function() {
 		var text = $(this).text();
-		console.log(text);
+
 		$("input").val(text);
 		var letter = $("input").value;
 		var x = guess(guessedWord, hiddenWord, text);
@@ -109,7 +112,14 @@ function remainingLives(lives, hiddenWord) {
 			break;
 		case 0:
 			drawRightLeg();
-			alert("You lost. The hidden word was " +hiddenWord);
+			var answer = confirm("You lost. The hidden word was " + hiddenWord + "\n Do you want to play another game?");
+			//console.log(answer);
 			break;
+
+	}
+	if (answer === true) {
+
+		location.reload();
+		
 	}
 }
