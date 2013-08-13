@@ -3,6 +3,13 @@ styles[0] = "styles/defaultStyle.css";
 styles[1] = "styles/redStyle.css";
 styles[2] = "styles/blueStyle.css";
 
+
+
+var guessesCount = 0;
+var totalGuesses=0;
+ var results = new Array(5);
+ results[1] = 0;
+
 	  Hide();
 	function Hide() {
 	$(".hidden").css('display', 'none')
@@ -10,10 +17,9 @@ styles[2] = "styles/blueStyle.css";
 
 	function Show() {
 		var selected = $(".selected");
-		selected.slideDown('slow', function() {
-			
+		//selected.slideDown('slow', function() {	
 		selected.css('display', 'block');
-		});
+		//});
 	}
 
 	function ShowSettings() {
@@ -25,6 +31,7 @@ styles[2] = "styles/blueStyle.css";
 
 		settings.removeClass('hidden');
 		settings.addClass('selected')
+
 		Show();
 		Hide();
 
@@ -92,20 +99,111 @@ function changeStyle(style) {
 }
 
 
+function CheckForUniqueDigits(randomNumber) {
 
-/*
-function changeStyle(style) {
+    var number = randomNumber;
+    var isUnique = true;
+    var i;
+    var j;
+    var lengthOfNumber = 1;
+    var numberAsString = number.toString();
+    for (i = 0; i < numberAsString.length - 1; i++) {
+        if (!isUnique) {
+            break;
+        };
+        for (j = i + 1; j <= numberAsString.length - 1; j++) {
 
-    document.getElementById("style").href = style;
-    var text = document.getElementById("style").href;
-    saveState(text);
+            if (numberAsString.charAt(i) !== numberAsString.charAt(j)) {
+                isUnique = true;
+            } else {
+                isUnique = false
+                break;
+            };
+        };
+    };
+    return isUnique;
+};
 
+function GenerateRandomNumber() {
+
+    var randomNumber;
+    var lengthOfNumber = 1;
+    for (;;) {
+        randomNumber = Math.floor(Math.random() * 10000)
+        lengthOfNumber = randomNumber.toString().length;
+        if (lengthOfNumber === 4) {
+            var isRandomNumber = CheckForUniqueDigits(randomNumber);
+            break;
+        };
+    };
+    if (!isRandomNumber) {
+        GenerateRandomNumber();
+    } else {
+        document.getElementById("task2").innerHTML = randomNumber;
+        $("#task2").html(randomNumber);
+    }
 }
-function saveState(text) {
 
-    var value = text;
-    var key = "path";
-    localStorage.setItem(key, value);
-                
+function startNewGame() {
+    GenerateRandomNumber();
+    $("#GuessNumber").css('display', 'inline');
+    $("#inputNumber").css('display', 'inline');
+    clearHistory();
+    hideHistory();
 }
-*/
+
+function showHistory() {
+
+    $("#history").css('display', 'inline');
+    $("#showHistoryBtn").css('display', 'none');
+    $("#hideHistoryBtn").css('display', 'inline');
+}
+
+function hideHistory() {
+
+    $("#history").css('display', 'none');
+    $("#hideHistoryBtn").css('display', 'none');
+    $("#showHistoryBtn").css('display', 'inline');
+}
+
+function clearHistory() {
+
+    $("#history").html("");
+}
+function CompareNumbers() {
+
+    var playerNumber = $("#inputNumber").val();
+    $("#hiddenNumber").html(playerNumber);
+    var playerNumberAsString = playerNumber.toString();
+    var i;
+    var j;
+    var bullCount = 0;
+    var cowCount = 0;
+    var randomNumber = $("#task2").html();
+    var randomNumberAsString = randomNumber.toString();
+    for (i = 0; i < playerNumber.length; i++) {
+        for (j = 0; j < playerNumber.length; j++) {
+
+            if (playerNumber.charAt(i) === randomNumberAsString.charAt(j) && i === j) {
+                bullCount++;
+                break;
+            }
+            if (playerNumber.charAt(i) === randomNumberAsString.charAt(j) && i !== j) {
+                cowCount++
+                break;
+            };
+        };
+    };
+    ++guessesCount;
+    if (bullCount ===4) {
+        totalGuesses = guessesCount;
+        guessesCount = 0;
+    };
+    $("#task1").html("Cows: " + cowCount + " Bulls: " + bullCount)
+}
+function AddToHistory() {
+    var playerNumber = $("#hiddenNumber").html();
+    var count = $("#task1").html()
+    $("#history").append(playerNumber + "</br>")
+    $("#history").append( count + "</br>")
+}
