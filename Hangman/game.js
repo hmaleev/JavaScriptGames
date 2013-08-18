@@ -1,4 +1,3 @@
-
 var hiddenWord = $("#hiddenWord");
 var hiddenWordLength = hiddenWord.length;
 var guessedWord = new Array();
@@ -26,15 +25,13 @@ guessedDiv.html(guessedWord.join(""));
 
 
 function getLetter() {
-		return $("button").click(function() {
+
+	$("body").on("click", "button", function() {
 		var text = $(this).text();
 		$("input").val(text);
-	//	var letter = $("input").value;
 		var x = guess(guessedWord, hiddenWord, text);
 		guessedDiv.html(x.join(""));
-	});
-	var letter = $("input").value;
-	return letter
+	})
 }
 
 function getWord() {
@@ -82,7 +79,7 @@ function guess(guessedWord, hiddenWord, letter) {
 	if (answer === true) {
 
 		location.reload();
-		
+
 	}
 
 	return guessedWord;
@@ -116,7 +113,7 @@ function remainingLives(lives, hiddenWord) {
 	if (answer === true) {
 
 		location.reload();
-		
+
 	}
 
 }
