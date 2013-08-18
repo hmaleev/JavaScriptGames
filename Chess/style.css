@@ -1,0 +1,14 @@
+.white{
+	background-image: url("DarkTile.gif"); 
+}
+.dark {
+	background-image: url("WhiteTile.gif");
+}
+th,td {
+	width: 50px;
+	height: 50px;
+	
+}
+ table
+{
+}
