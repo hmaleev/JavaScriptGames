@@ -1,3 +1,6 @@
 TO DO
 
-1. update page on button click or on changed radio button
+1. Add High scores
+2. Add Letter history
+3. Add more categories
+4. Add more styles
