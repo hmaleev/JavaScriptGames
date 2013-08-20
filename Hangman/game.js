@@ -1,9 +1,8 @@
-$(document).ready(function() {
 
-
+$(function() {
 
 	var game = new Game();
-
+	var draw = new Draw();
 	game.play();
 
 	function Game() {
@@ -49,22 +48,22 @@ $(document).ready(function() {
 
 			switch (lives) {
 				case 5:
-					drawHead();
+					draw.DrawHead();
 					break;
 				case 4:
-					drawBody();
+					draw.DrawBody();
 					break;
 				case 3:
-					drawLeftArm();
+					draw.DrawLeftArm();
 					break;
 				case 2:
-					drawRightArm();
+					draw.DrawRightArm();
 					break;
 				case 1:
-					drawLeftLeg();
+					draw.DrawLeftLeg();
 					break;
 				case 0:
-					drawRightLeg();
+					draw.DrawRightLeg();
 					var answer = confirm("You lost. The hidden word was " + hiddenWord + "\n Do you want to play another game?");
 					//console.log(answer);
 					break;
@@ -107,10 +106,10 @@ $(document).ready(function() {
 				var x = game.guess(guessedWord, hiddenWord, text);
 				guessedDiv.html(x.join(""));
 			});
-
 		}
 		this.play = function() {
 
+			draw.DrawGallow();
 			wordsArray = game.getWords();
 			var randomWord = game.getRandomWords(wordsArray);
 			hiddenWord.html(randomWord);
@@ -121,8 +120,85 @@ $(document).ready(function() {
 			console.log(hiddenWord);
 			var letter = game.getLetter();
 			game.guess(guessedWord, hiddenWord, letter, lives);
-			//guessedDiv.html(guessedWord.join(""));
+		}
+	}
 
+	function Draw() {
+
+		var c = document.getElementById("canvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+
+		this.DrawGallow = function() {
+
+			ctx.moveTo(50, 290);
+			ctx.lineTo(150, 290);
+
+			ctx.moveTo(100, 290);
+			ctx.lineTo(100, 70);
+
+			ctx.moveTo(100, 70);
+			ctx.lineTo(200, 70);
+
+			ctx.moveTo(200, 70);
+			ctx.lineTo(200, 100);
+
+			ctx.closePath();
+			ctx.stroke();
+		}
+		this.DrawHead = function() {
+
+			ctx.beginPath();
+			ctx.moveTo(220, 120);
+			ctx.arc(200, 120, 20, 0, 2 * Math.PI);
+
+			ctx.closePath();
+			ctx.stroke();
+		}
+		this.DrawBody = function() {
+
+			ctx.beginPath();
+			//body
+			ctx.moveTo(200, 140);
+			ctx.lineTo(200, 200);
+
+			ctx.closePath();
+			ctx.stroke();
+		}
+		this.DrawLeftLeg = function() {
+			ctx.beginPath();
+			//legs
+			ctx.moveTo(200, 200);
+			ctx.lineTo(170, 250);
+
+			ctx.closePath();
+			ctx.stroke();
+		}
+		this.DrawRightLeg = function() {
+
+			ctx.beginPath();
+			ctx.moveTo(200, 200);
+			ctx.lineTo(230, 250);
+
+			ctx.closePath();
+			ctx.stroke();
+		}
+		this.DrawLeftArm = function() {
+
+			ctx.beginPath();
+			ctx.moveTo(200, 150);
+			ctx.lineTo(170, 200);
+
+			ctx.closePath();
+			ctx.stroke();
+		}
+		this.DrawRightArm = function() {
+			ctx.beginPath();
+			ctx.moveTo(200, 150);
+			ctx.lineTo(230, 200);
+
+			ctx.closePath();
+			ctx.stroke();
 		}
 	}
 });
